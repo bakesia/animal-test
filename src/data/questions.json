@@ -1,0 +1,143 @@
+[
+  {
+    "id": 1,
+    "question": "친구들과 모였을 때 나는…",
+    "choices": [
+      {
+        "text": "자연스럽게 리더 역할을 맡는다",
+        "scores": { "lion": 3, "fox": 1 }
+      },
+      {
+        "text": "모두가 웃을 수 있게 분위기를 띄운다",
+        "scores": { "dolphin": 3, "rabbit": 1 }
+      },
+      { "text": "조용히 대화를 경청한다", "scores": { "owl": 3, "cat": 1 } }
+    ]
+  },
+  {
+    "id": 2,
+    "question": "새로운 일을 시작할 때 나는…",
+    "choices": [
+      {
+        "text": "계획보다는 일단 부딪쳐본다",
+        "scores": { "fox": 3, "lion": 1 }
+      },
+      {
+        "text": "계획을 세우고 차근차근 준비한다",
+        "scores": { "owl": 3, "cat": 1 }
+      },
+      {
+        "text": "누구와 함께할지 먼저 생각한다",
+        "scores": { "dolphin": 3, "rabbit": 1 }
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "question": "혼자 있는 시간이 생기면 나는…",
+    "choices": [
+      {
+        "text": "조용한 카페나 방에서 나만의 시간을 즐긴다",
+        "scores": { "cat": 3, "owl": 1 }
+      },
+      { "text": "사색하거나 책을 읽는다", "scores": { "owl": 3, "cat": 1 } },
+      {
+        "text": "심심해서 친구에게 연락한다",
+        "scores": { "dolphin": 3, "rabbit": 1 }
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "question": "스트레스를 받을 때 나는…",
+    "choices": [
+      {
+        "text": "운동하거나 크게 소리 지르며 푼다",
+        "scores": { "lion": 3, "fox": 1 }
+      },
+      {
+        "text": "마음이 편해지는 영상을 본다",
+        "scores": { "rabbit": 3, "dolphin": 1 }
+      },
+      {
+        "text": "계획을 세워 스트레스를 분석하고 해결한다",
+        "scores": { "owl": 3, "cat": 1 }
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "question": "여행을 간다면 나는…",
+    "choices": [
+      {
+        "text": "도전적인 액티비티 위주의 여행이 좋다",
+        "scores": { "fox": 3, "lion": 1 }
+      },
+      {
+        "text": "편안하고 조용한 여행을 선호한다",
+        "scores": { "rabbit": 3, "cat": 1 }
+      },
+      {
+        "text": "맛집, 핫플, 명소 위주로 계획을 짠다",
+        "scores": { "lion": 3, "dolphin": 1 }
+      }
+    ]
+  },
+  {
+    "id": 6,
+    "question": "문제를 마주했을 때 나는…",
+    "choices": [
+      {
+        "text": "직관적으로 결정하고 실행한다",
+        "scores": { "lion": 3, "fox": 1 }
+      },
+      {
+        "text": "신중히 고민하고 여러 가능성을 본다",
+        "scores": { "owl": 3, "cat": 1 }
+      },
+      {
+        "text": "다른 사람의 의견을 먼저 듣는다",
+        "scores": { "rabbit": 3, "dolphin": 1 }
+      }
+    ]
+  },
+  {
+    "id": 7,
+    "question": "나의 성격을 가장 잘 표현하는 단어는?",
+    "choices": [
+      { "text": "모험", "scores": { "fox": 3, "lion": 1 } },
+      { "text": "따뜻함", "scores": { "rabbit": 3, "dolphin": 1 } },
+      { "text": "자유", "scores": { "cat": 3, "owl": 1 } }
+    ]
+  },
+  {
+    "id": 8,
+    "question": "내가 친구에게 해주고 싶은 말은?",
+    "choices": [
+      { "text": "함께 도전하자!", "scores": { "fox": 3, "lion": 2 } },
+      { "text": "늘 곁에 있어 줄게", "scores": { "rabbit": 3, "dolphin": 2 } },
+      { "text": "조용히 응원할게", "scores": { "owl": 3, "cat": 2 } }
+    ]
+  },
+  {
+    "id": 9,
+    "question": "휴일을 보내는 나의 방식은?",
+    "choices": [
+      { "text": "모험 스포츠를 즐긴다", "scores": { "fox": 3, "lion": 2 } },
+      {
+        "text": "친구들과 모임을 가진다",
+        "scores": { "dolphin": 3, "rabbit": 2 }
+      },
+      { "text": "책을 읽거나 혼자 생각한다", "scores": { "owl": 3, "cat": 2 } }
+    ]
+  },
+  {
+    "id": 10,
+    "question": "내가 가장 중요하게 생각하는 가치는?",
+    "choices": [
+      { "text": "자유와 도전", "scores": { "fox": 3, "cat": 2 } },
+      { "text": "화합과 평화", "scores": { "rabbit": 3, "dolphin": 2 } },
+      { "text": "책임과 신중함", "scores": { "owl": 3, "lion": 2 } }
+    ]
+  }
+]
