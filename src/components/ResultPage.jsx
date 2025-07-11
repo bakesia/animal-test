@@ -146,7 +146,7 @@ export default function ResultPage() {
         </span>
         이네요.
       </h1>
-      <p className="w-[50vw] text-center">
+      <p className="md:w-[50vw] w-[80vw] text-center">
         <Typewriter
           key={animal.description}
           words={[animal.description]}

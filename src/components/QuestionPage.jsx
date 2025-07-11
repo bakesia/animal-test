@@ -60,9 +60,9 @@ export default function QuestionPage() {
     //   ))}
     // </div>
 
-    <div className="flex flex-col w-[50%] justify-center items-center">
+    <div className="flex flex-col w-[70%] justify-center items-center">
       <h2 className="font-bold pb-2 text-xl mb-2">
-        <span className="text-orange-500">{currentIndex + 1}</span> /{" "}
+        <span className="text-orange-500">{currentIndex}</span> /{" "}
         {questions.length}
       </h2>
       <div className="w-[80%] bg-gray-200 rounded-full h-2 mb-10">

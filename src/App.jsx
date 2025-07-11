@@ -1,6 +1,5 @@
 import "./App.css";
 import { Routes, BrowserRouter, Route } from "react-router-dom";
-import { Link } from "react-router-dom";
 import { FaDog, FaHome } from "react-icons/fa";
 import StartPage from "./components/StartPage";
 import QuestionPage from "./components/QuestionPage";
@@ -14,9 +13,6 @@ function App() {
           <div className="flex items-center gap-2 mx-auto">
             나는 무슨 동물일까요 <FaDog />
           </div>
-          <Link to="/">
-            <FaHome className="text-2xl" />
-          </Link>
         </header>
 
         <main className="flex-1 w-full flex flex-col justify-center items-center bg-slate-50">
@@ -27,7 +23,7 @@ function App() {
           </Routes>
         </main>
         <footer className="flex justify-center items-center h-20 mt-5 bg-black text-white">
-          copyright : ybh
+          copyright : ...
         </footer>
       </div>
     </BrowserRouter>
