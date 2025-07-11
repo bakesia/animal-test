@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 // eslint-disable-next-line no-unused-vars
 import { motion, AnimatePresence } from "framer-motion";
 import { Typewriter } from "react-simple-typewriter";
@@ -7,6 +8,8 @@ import animalDescriptions from "../data/animalDescription.json";
 import Abutton from "../UI/Abutton";
 
 export default function ResultPage() {
+  const navigate = useNavigate();
+
   // nickname과 넘어온 scores 변수
   const location = useLocation();
   const scores = location.state?.scores;
@@ -16,21 +19,53 @@ export default function ResultPage() {
   //   rabbit: 0,
   //   dolphin: 0,
   //   owl: 0,
-  //   fox: 10,
-  //   cat: 0,
+  //   fox: 0,
+  //   cat: 10,
   // });
-  const nickname = location.state?.nickname;
 
+  const [loading, setLoading] = useState(true);
   const [looping, setLooping] = useState(false);
 
+  const nickname = location.state?.nickname;
+
   useEffect(() => {
+    // console.log(animal.color);
     // 등장 애니메이션 끝난 후 반복 애니메이션 시작
     const timer = setTimeout(() => {
       setLooping(true);
-    }, 900); // 등장 애니메이션 시간과 맞춤 (1초)
+    }, 2900); // 등장 애니메이션 시간과 맞춤 (1초)
 
     return () => clearTimeout(timer);
   }, []);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 2000);
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (loading) {
+    return (
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        className="flex flex-col justify-center items-center w-full h-full text-xl"
+      >
+        <p className="animate-pulse font-bold text-2xl text-orange-900">
+          <Typewriter
+            key="ending"
+            words={["결과를 분석 중입니다..."]}
+            loop={true}
+            cursor
+            cursorStyle="|"
+            typeSpeed={80}
+            backspeed={60}
+          />
+        </p>
+      </motion.div>
+    );
+  }
 
   // scores가 undefined면 대비하기
   if (!scores) {
@@ -56,6 +91,10 @@ export default function ResultPage() {
     }
   };
 
+  const handleReset = () => {
+    navigate("/"); // start 페이지로 이동
+  };
+
   return (
     <div className="flex flex-col justify-center items-center">
       {/* <div className="w-[300px] m-5 border border-gray-800 rounded-3xl">
@@ -65,6 +104,7 @@ export default function ResultPage() {
           alt={animal.name}
         />
       </div> */}
+      <h1 className="font-bold text-2xl mt-5">당신은 바로...</h1>
       <motion.div
         className={`w-[300px] m-8 border border-gray-800 rounded-3xl shadow-2xl ${animal.color}`}
         initial={{ opacity: 0, scale: 0.5, y: 30 }}
@@ -100,8 +140,11 @@ export default function ResultPage() {
         />
       </motion.div>
       <h1 className="text-2xl pt-5 pb-2">
-        <span className="font-bold">{nickname}</span>님은 바로 {animal.name}(
-        {animal.type})이네요.
+        <span className="font-bold">{nickname}</span>님은{" "}
+        <span className="font-bold text-orange-900">
+          {animal.name}({animal.type})
+        </span>
+        이네요.
       </h1>
       <p className="w-[50vw] text-center">
         <Typewriter
@@ -119,10 +162,13 @@ export default function ResultPage() {
         <p className="text-5xl">{animal.goodWith.join(" ")}</p>
         <p className="text-5xl">{animal.badWith.join(" ")}</p>
       </div>
-      <Abutton
-        text="결과 공유"
-        onClick={() => resultShare(nickname, animal.name)}
-      />
+      <div className="flex flex-col pt-5 mb-5 w-[80%] gap-2 place-items-center">
+        <Abutton
+          text="결과 공유"
+          onClick={() => resultShare(nickname, animal.name)}
+        />
+        <Abutton text="테스트 다시하기" onClick={() => handleReset()} />
+      </div>
     </div>
   );
 }

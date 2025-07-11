@@ -41,7 +41,7 @@ export default function QuestionPage() {
     // 다음 질문 or 결과 페이지 이동
     if (currentIndex < questions.length - 1) {
       setCurrentIndex(currentIndex + 1);
-      // console.log(scores);
+      // console.log(scores, questions.length);
     } else {
       navigate("/result", { state: { scores, nickname } });
     }
@@ -61,7 +61,17 @@ export default function QuestionPage() {
     // </div>
 
     <div className="flex flex-col w-[50%] justify-center items-center">
-      <h2 className="font-bold pb-2 text-xl">{currentIndex + 1} 번째 질문</h2>
+      <h2 className="font-bold pb-2 text-xl mb-2">
+        <span className="text-orange-500">{currentIndex + 1}</span> /{" "}
+        {questions.length}
+      </h2>
+      <div className="w-[80%] bg-gray-200 rounded-full h-2 mb-10">
+        <div
+          className="bg-orange-600 h-2 rounded-full transition-all duration-300"
+          style={{ width: `${(currentIndex + 1 / questions.length) * 10}%` }}
+        ></div>
+      </div>
+
       <AnimatePresence mode="wait">
         <motion.div
           key={currentIndex}
