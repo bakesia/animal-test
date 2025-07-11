@@ -27,6 +27,10 @@ react-router-dom (7.6v) – 다중 페이지 라우팅
 - 선택에 따른 동물 점수 계산(JSON 기반)
 - 계산에 따른 결과 페이지 도출
 
+# 🔗 데모 링크
+
+[https://animal-test-delta.vercel.app/](https://animal-test-delta.vercel.app/)
+
 # ✨ 향후 추가 가능 기능 (옵션)
 
 - ⏳ 결과 공유 이미지 자동 생성 (캡처 기반)
