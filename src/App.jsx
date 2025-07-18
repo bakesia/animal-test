@@ -4,6 +4,7 @@ import { FaDog, FaHome } from "react-icons/fa";
 import StartPage from "./components/StartPage";
 import QuestionPage from "./components/QuestionPage";
 import ResultPage from "./components/ResultPage";
+import StatsPage from "./components/StatsPage";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
             <Route path="/" element={<StartPage />} />
             <Route path="/question" element={<QuestionPage />} />
             <Route path="/result" element={<ResultPage />} />
+            <Route path="/stats" element={<StatsPage />} />
           </Routes>
         </main>
         <footer className="flex justify-center items-center h-20 mt-5 bg-black text-white">

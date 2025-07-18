@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 // eslint-disable-next-line no-unused-vars
 import { motion, AnimatePresence } from "framer-motion";
 import { Typewriter } from "react-simple-typewriter";
+import { supabase } from "../lib/SupabaseClient";
 import animalDescriptions from "../data/animalDescription.json";
 import Abutton from "../UI/Abutton";
 
@@ -22,6 +23,9 @@ export default function ResultPage() {
   //   fox: 0,
   //   cat: 10,
   // });
+  // scores 변수에서 최고점 동물 선택
+  const topAnimal = Object.entries(scores).sort((a, b) => b[1] - a[1])[0][0];
+  const animal = animalDescriptions[topAnimal];
 
   const [loading, setLoading] = useState(true);
   const [looping, setLooping] = useState(false);
@@ -44,6 +48,23 @@ export default function ResultPage() {
     }, 2000);
     return () => clearTimeout(timer);
   }, []);
+
+  // nickname, animal을 supabase로 전달
+  useEffect(() => {
+    if (!animal) return;
+
+    const saveResult = async () => {
+      const { data, error } = await supabase
+        .from("result")
+        .insert([{ nickname: nickname, animal: animal.name }])
+        .select();
+
+      if (error) console.error(error);
+      else console.log(data);
+    };
+
+    saveResult();
+  }, [nickname, animal]);
 
   if (loading) {
     return (
@@ -72,10 +93,6 @@ export default function ResultPage() {
     return <div className="text-3xl font-bold">점수 데이터가 없습니다.</div>;
   }
 
-  // scores 변수에서 최고점 동물 선택
-  const topAnimal = Object.entries(scores).sort((a, b) => b[1] - a[1])[0][0];
-  const animal = animalDescriptions[topAnimal];
-
   const resultShare = (nickname, animalName) => {
     const startUrl = window.location.origin + "/"; // 도메인 + 포트만 가져옴 (ex: https://mydomain.com)
 
@@ -93,6 +110,10 @@ export default function ResultPage() {
 
   const handleReset = () => {
     navigate("/"); // start 페이지로 이동
+  };
+
+  const handleStats = () => {
+    navigate("/stats"); // stats 페이지로 이동
   };
 
   return (
@@ -167,6 +188,7 @@ export default function ResultPage() {
           text="결과 공유"
           onClick={() => resultShare(nickname, animal.name)}
         />
+        <Abutton text="결과 통계" onClick={() => handleStats()} />
         <Abutton text="테스트 다시하기" onClick={() => handleReset()} />
       </div>
     </div>
