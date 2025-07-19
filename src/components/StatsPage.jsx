@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { supabase } from "../lib/SupabaseClient";
 import {
@@ -13,6 +13,8 @@ import Abutton from "../UI/Abutton";
 
 export default function StatsPage() {
   const navigate = useNavigate();
+  const location = useLocation();
+  const { nickname, scores } = location.state || {};
   const [animalStats, setAnimalStats] = useState({});
 
   const COLORS = {
@@ -47,8 +49,9 @@ export default function StatsPage() {
     readStats();
   }, []);
 
-  const handleReset = () => {
-    navigate("/"); // start 페이지로 이동
+  /**결과 페이지로 재이동 */
+  const handleResult = () => {
+    navigate("/result", { state: { nickname, scores } });
   };
 
   // 객체 animalStats를 recharts용 배열로 변환
@@ -99,7 +102,7 @@ export default function StatsPage() {
         <span className="text-orange-500">{`${topAnimal.name}(${topAnimal.value})`}</span>{" "}
         입니다!
       </span>
-      <Abutton text="테스트 다시하기" onClick={() => handleReset()} />
+      <Abutton text="결과 페이지로 이동" onClick={() => handleResult()} />
     </div>
   );
 }

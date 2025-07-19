@@ -50,6 +50,12 @@ export default function ResultPage() {
 
   useEffect(() => {
     if (!animal) return;
+
+    /**중복 전달을 막기 위해 전달 상태를 세션에 저장*/
+    const saved = sessionStorage.getItem("resultSaved");
+    if (saved === "true") {
+      return;
+    }
     /**유저의 nickname, animal을 supabase로 전달하는 함수*/
     const saveResult = async () => {
       // eslint-disable-next-line no-unused-vars
@@ -59,7 +65,9 @@ export default function ResultPage() {
         .select();
 
       if (error) console.error(error);
-      // else console.log(data);
+      else {
+        sessionStorage.setItem("resultSaved", "true");
+      } // db에 보냈으면 true로(중복 전달 방지)
     };
 
     saveResult();
@@ -113,12 +121,13 @@ export default function ResultPage() {
 
   /**start 페이지로 이동 함수 */
   const handleReset = () => {
+    sessionStorage.removeItem("resultSaved"); // 처음으로 돌아가면 세션 삭제
     navigate("/");
   };
 
   /**stats 페이지로 이동 함수 */
   const handleStats = () => {
-    navigate("/stats");
+    navigate("/stats", { state: { nickname, scores } });
   };
 
   return (
