@@ -1,18 +1,45 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Typewriter } from "react-simple-typewriter";
+import { supabase } from "../lib/SupabaseClient";
 import Abutton from "../UI/Abutton";
 
 export default function StartPage() {
-  // 유저 닉네임 상태 관리 변수
+  /**유저 닉네임 상태 관리 변수*/
   const [nickname, setNickname] = useState("");
-  // 리다이렉트용 navigate 변수
+  /**DB에 존재하는 모든 유저 닉네임 리스트*/
+  const [allNicks, setAllNicks] = useState([]);
+  /**리다이렉트용 navigate 변수*/
   const navigate = useNavigate();
 
-  // 테스트 시작 버튼 함수(닉네임이 null이 아니면 question 페이지로 넘어감, ninkname도 같이)
+  useEffect(() => {
+    /**DB에 존재하는 닉네임 불러와서 allNicks에 저장 */
+    const readNicks = async () => {
+      let { data: result, error } = await supabase
+        .from("result")
+        .select("nickname");
+
+      if (error) {
+        console.error(error);
+        return;
+      }
+
+      const nicksList = [...new Set(result.map((item) => item.nickname))];
+      setAllNicks(nicksList);
+    };
+
+    readNicks();
+  }, []);
+
+  /**테스트 시작 버튼 함수(닉네임이 null이 아니고, 중복되지 않으면 question 페이지로 넘어감, ninkname 변수도 같이)*/
   const handleStart = () => {
     if (nickname.trim() === "") {
       alert("닉네임을 입력해 주세요.");
+      return;
+    }
+
+    if (allNicks.includes(nickname.trim())) {
+      alert("이미 등록되어 있는 닉네임입니다. 다른 닉네임을 입력해 주세요.");
       return;
     }
     navigate("/question", { state: { nickname } });

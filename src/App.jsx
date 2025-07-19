@@ -1,6 +1,6 @@
 import "./App.css";
 import { Routes, BrowserRouter, Route } from "react-router-dom";
-import { FaDog, FaHome } from "react-icons/fa";
+import { FaDog } from "react-icons/fa";
 import StartPage from "./components/StartPage";
 import QuestionPage from "./components/QuestionPage";
 import ResultPage from "./components/ResultPage";

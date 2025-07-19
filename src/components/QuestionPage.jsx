@@ -7,14 +7,14 @@ import questions from "../data/questions.json";
 import Abutton from "../UI/Abutton";
 
 export default function QuestionPage() {
-  // 걍 결과 페이지로 nickname 넘기기 위한 location 변수
+  /**걍 결과 페이지로 nickname 넘기기 위한 location 변수*/
   const location = useLocation();
   const nickname = location.state?.nickname;
   const navigate = useNavigate();
 
-  // 현재 질문 페이지 index 상태 관리 변수
+  /**현재 질문 페이지 index 상태 관리 변수*/
   const [currentIndex, setCurrentIndex] = useState(0);
-  // 동물 점수 리스트 상태 관리 변수
+  /**동물 점수 리스트 상태 관리 변수*/
   const [scores, setScores] = useState({
     lion: 0,
     rabbit: 0,
@@ -24,9 +24,10 @@ export default function QuestionPage() {
     cat: 0,
   });
 
-  //question.json 내용 불러와 현재 index에 해당하는 질문 저장
+  /**question.json 내용 불러와 현재 index에 해당하는 질문 저장*/
   const question = questions[currentIndex];
 
+  /**페이지 조정 함수 (선택지에 따른 점수 누적, 인덱스 값에 따른 질문 변경)*/
   const handleAnswer = (selectedScores) => {
     // 점수 누적
     setScores((prev) => {

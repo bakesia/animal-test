@@ -10,10 +10,14 @@ import Abutton from "../UI/Abutton";
 
 export default function ResultPage() {
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(true);
+  const [looping, setLooping] = useState(false);
 
   // nickname과 넘어온 scores 변수
   const location = useLocation();
   const scores = location.state?.scores;
+  const nickname = location.state?.nickname;
+
   // 테스트용 점수 변수
   // const [scores, setScores] = useState({
   //   lion: 0,
@@ -23,21 +27,16 @@ export default function ResultPage() {
   //   fox: 0,
   //   cat: 10,
   // });
-  // scores 변수에서 최고점 동물 선택
+
+  /**scores 변수에서 최고점 동물 선택*/
   const topAnimal = Object.entries(scores).sort((a, b) => b[1] - a[1])[0][0];
   const animal = animalDescriptions[topAnimal];
 
-  const [loading, setLoading] = useState(true);
-  const [looping, setLooping] = useState(false);
-
-  const nickname = location.state?.nickname;
-
   useEffect(() => {
-    // console.log(animal.color);
     // 등장 애니메이션 끝난 후 반복 애니메이션 시작
     const timer = setTimeout(() => {
       setLooping(true);
-    }, 2900); // 등장 애니메이션 시간과 맞춤 (1초)
+    }, 2900); // 등장 애니메이션 시간과 맞춤 (2초)
 
     return () => clearTimeout(timer);
   }, []);
@@ -49,18 +48,18 @@ export default function ResultPage() {
     return () => clearTimeout(timer);
   }, []);
 
-  // nickname, animal을 supabase로 전달
   useEffect(() => {
     if (!animal) return;
-
+    /**유저의 nickname, animal을 supabase로 전달하는 함수*/
     const saveResult = async () => {
+      // eslint-disable-next-line no-unused-vars
       const { data, error } = await supabase
         .from("result")
         .insert([{ nickname: nickname, animal: animal.name }])
         .select();
 
       if (error) console.error(error);
-      else console.log(data);
+      // else console.log(data);
     };
 
     saveResult();
@@ -93,27 +92,33 @@ export default function ResultPage() {
     return <div className="text-3xl font-bold">점수 데이터가 없습니다.</div>;
   }
 
+  /** 결과 공유 함수 (유저 닉네임과 결과 동물 출력, 링크 공유) */
   const resultShare = (nickname, animalName) => {
     const startUrl = window.location.origin + "/"; // 도메인 + 포트만 가져옴 (ex: https://mydomain.com)
 
     if (navigator.share) {
       navigator
         .share({
-          title: `${nickname}님의 테스트 결과는 ${animalName}입니다! 당신은 어떤 동물인지 궁금하지 않으신가요? 지금 확인해보세요!`,
+          title: `${nickname}님의 테스트 결과는 ${animalName}입니다!`,
+          text: `당신은 어떤 동물인지 궁금하지 않으신가요? 지금 확인해보세요!`,
           url: startUrl, // 시작 페이지 주소만 넣음
         })
         .catch(console.error);
     } else {
-      alert(`테스트 시작하러 가기: ${startUrl}`);
+      alert(
+        `공유를 지원하지 않는 환경입니다.\n테스트 시작하러 가기: ${startUrl}`
+      );
     }
   };
 
+  /**start 페이지로 이동 함수 */
   const handleReset = () => {
-    navigate("/"); // start 페이지로 이동
+    navigate("/");
   };
 
+  /**stats 페이지로 이동 함수 */
   const handleStats = () => {
-    navigate("/stats"); // stats 페이지로 이동
+    navigate("/stats");
   };
 
   return (
@@ -151,7 +156,7 @@ export default function ResultPage() {
           ease: "easeInOut",
           repeat: looping ? Infinity : 0,
         }}
-        // **포인트: exit props를 비워두거나 제거하여 사라짐 방지**
+        /**포인트: exit props를 비워두거나 제거하여 사라짐 방지*/
         exit={undefined}
       >
         <img
